@@ -1,19 +1,22 @@
 package com.deeosoft.rxjavasamplecode.ui
 
 import android.os.Bundle
-import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Button
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.deeosoft.rxjavasamplecode.R
+import com.deeosoft.rxjavasamplecode.presenters.quotepresenter.QuotePresenter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class QuotesActivity: AppCompatActivity() {
     private lateinit var quoteLayout: LinearLayout
     private lateinit var quoteFAB: FloatingActionButton
     private lateinit var submitQuote: Button
+
+    val quotePresenter: QuotePresenter by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
