@@ -4,13 +4,13 @@ import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.deeosoft.rxjavasamplecode.Interactor.QuoteInteractor.IQuoteInteractor
 import com.deeosoft.rxjavasamplecode.domain.entities.Quote
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class QuotePresenter(private val iQuoteInteractor: IQuoteInteractor): IQuotePresenter {
+class QuotePresenter(private val iQuoteInteractor: IQuoteInteractor): IQuotePresenter, ViewModel() {
 
     private var allQuotes: MutableLiveData<List<Quote>> = MutableLiveData()
 
