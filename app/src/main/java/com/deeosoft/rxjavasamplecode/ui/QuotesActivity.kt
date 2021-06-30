@@ -9,8 +9,10 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.deeosoft.rxjavasamplecode.R
+import com.deeosoft.rxjavasamplecode.domain.entities.Quote
 import com.deeosoft.rxjavasamplecode.presenters.quotepresenter.QuotePresenter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.textfield.TextInputEditText
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.StringBuilder
 
@@ -19,6 +21,8 @@ class QuotesActivity: AppCompatActivity() {
     private lateinit var quoteFAB: FloatingActionButton
     private lateinit var submitQuote: Button
     private lateinit var quoteList: TextView
+    private lateinit var quoteText: TextInputEditText
+    private lateinit var quoteAuthor: TextInputEditText
 
     val quotePresenter: QuotePresenter by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +37,8 @@ class QuotesActivity: AppCompatActivity() {
         quoteLayout = findViewById(R.id.quote_layout)
         quoteFAB = findViewById(R.id.fab_add_new_quote)
         quoteList = findViewById(R.id.quote_list)
+        quoteText = findViewById(R.id.quote)
+        quoteAuthor = findViewById(R.id.quote_author)
         quoteFAB.setOnClickListener{
             if (quoteLayout.visibility == VISIBLE){
                 quoteLayout.visibility = GONE
@@ -47,6 +53,11 @@ class QuotesActivity: AppCompatActivity() {
             if(quoteLayout.visibility == VISIBLE){
                 quoteFAB.visibility = VISIBLE
                 quoteLayout.visibility = GONE
+
+                val quote = Quote(null, quoteText.text.toString(), quoteAuthor.text.toString())
+                quotePresenter.insert(quote)
+                quoteText.setText("")
+                quoteAuthor.setText("")
             }
         }
 
@@ -58,6 +69,8 @@ class QuotesActivity: AppCompatActivity() {
             }
             quoteList.text = stringBuilder.toString()
         })
+
+
     }
 
     override fun onBackPressed() {
