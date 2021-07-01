@@ -64,8 +64,8 @@ class QuotesActivity: AppCompatActivity() {
         quotePresenter.getAllQuotes().observe(this, Observer { quotes ->
             val stringBuilder = StringBuilder()
 
-            quotes.forEach {
-                stringBuilder.append("$it\n\n")
+            for(quote in quotes){
+                stringBuilder.append("$quote\n\n")
             }
             quoteList.text = stringBuilder.toString()
         })
